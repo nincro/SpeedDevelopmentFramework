@@ -9,11 +9,12 @@ from tensorflow.contrib import slim
 import tensorflow as tf
 class Xception(Net):
     
+
     def __init__(self,provider):
         super().__init__(provider=provider)
         self.depth = 130
     
-    def get_logits(self):
+    def getLogits(self):
         if hasattr(self, 'logits'):
             return self.logits
         with slim.arg_scope(self.arg_scope()):
@@ -109,21 +110,21 @@ class Xception(Net):
             self.logits = logits
         return logits
     
-    def get_total_loss(self):
+    def getTotalLoss(self):
         if hasattr(self, 'total_loss'):
             return self.total_loss
 #        assert self.logits is not 0
-        loss = slim.losses.softmax_cross_entropy(self.get_logits(), self.y_holder)
+        loss = slim.losses.softmax_cross_entropy(self.getLogits(), self.y_holder)
         self.total_loss = slim.losses.get_total_loss(add_regularization_losses=False)
         return self.total_loss
     
-    def get_accuracy(self):
+    def getAccuracy(self):
         if hasattr(self, 'accuracy'):
             return self.accuracy
 #        assert self.logits is not 0
         accuracy = tf.reduce_mean(
                 tf.cast(
-                    tf.equal(tf.argmax(self.get_logits(),axis=1),tf.argmax(self.y_holder,axis=1)),
+                    tf.equal(tf.argmax(self.getLogits(), axis=1), tf.argmax(self.y_holder, axis=1)),
                     tf.float32
                 )
             )
@@ -131,10 +132,10 @@ class Xception(Net):
         return accuracy
     
     
-    def get_train_op(self):
+    def getTrainOperation(self):
         if hasattr(self, 'train_op'):
             return self.train_op
         optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.015)
-        train_op = slim.learning.create_train_op(self.get_total_loss(),optimizer=optimizer)
+        train_op = slim.learning.create_train_op(self.getTotalLoss(), optimizer=optimizer)
         return train_op
     

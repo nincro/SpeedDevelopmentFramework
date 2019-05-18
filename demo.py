@@ -5,7 +5,6 @@ import tensorflow as tf
 from dataset.mnist_dataset import MnistDataset
 from dataset.cifar_dataset import CifarDataset
 from provider.mnistprovider import MnistProvider
-from utils import downloader
 from model.easynet import EasyNet
 #from tensorflow.contrib import slim
 
@@ -19,7 +18,7 @@ def main(_):
     provider = MnistProvider(dataset, batch_size=batch_size)
 
     model = EasyNet(data_provider=provider)
-    model.trainEpoch()
+    model.trainOneEpoch()
 
 #    with tf.Session() as sess:
 #        sess.run(tf.global_variables_initializer())

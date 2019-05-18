@@ -9,7 +9,12 @@ Created on Sun Feb 10 22:30:51 2019
 from .provider import Provider
 
 class ImageProvider(Provider):
-    def __init__(self, dataset, batch_size=100, shuffle=False):
+    def __init__(self, dataset, 
+                 batch_size_train=100, 
+                 shuffle_train=False,
+                 batch_size_test=100,
+                 shuffle_test=False
+                 ):
 #        self.dataset = input_data.read_data_sets("./data/MNIST_data/", one_hot=True)
 #        
 #        
@@ -22,7 +27,12 @@ class ImageProvider(Provider):
 #        self.size_test = self.dataset.test.num_examples
         super().__init__(dataset)
         self.st = 0
-        self.batch_size = batch_size
+        self.batch_size_train   = batch_size_train
+        self.batch_size_test    = batch_size_test
+        self.shuffle_train      = shuffle_train
+        self.shuffle_test       = shuffle_test
+        
+        
         
         #此部分需要自己定义
         self.width = dataset.width
