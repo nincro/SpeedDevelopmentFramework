@@ -8,7 +8,7 @@ from .dataset import Dataset
 import tensorflow.examples.tutorials.mnist.input_data as input_data
     
 class MnistDataset(Dataset):
-    def __init__(self, path_to_read="./dataset/MNIST_data/"):
+    def __init__(self, path_to_read="./dataset/data/MNIST_data/"):
         super().__init__(path_to_read=path_to_read)
         #此部分需要自己定义
         self.width = 28

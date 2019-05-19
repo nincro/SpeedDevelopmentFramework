@@ -33,6 +33,14 @@ class MnistProvider(Provider):
         self.yshape = [None, dataset.num_classes]
         return
     
+    def getNumClasses(self):
+        return self.num_classes
+    
+    def getXShape(self):
+        return self.xshape
+    
+    def getYShape(self):
+        return self.yshape
     
     def loadTrainBatch(self):
         st = self.st
